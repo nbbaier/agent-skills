@@ -92,14 +92,14 @@ const selection = items.find((item) => item.id === selectedId) ?? null;
 // ❌ Bad
 useEffect(() => {
    if (product.isInCart) {
-      showNotification(`Added ${product.name}!`);
+      showNotification("Added " + product.name + "!");
    }
 }, [product]);
 
 // ✅ Good - in event handler
 function handleBuyClick() {
    addToCart(product);
-   showNotification(`Added ${product.name}!`);
+   showNotification("Added " + product.name + "!");
 }
 ```
 
