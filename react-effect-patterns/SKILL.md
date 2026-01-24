@@ -22,6 +22,7 @@ Effects are an escape hatch from React for synchronizing with external systems. 
 ## Decision Tree
 
 **Why does this code run?**
+
 - Component displayed → Effect
 - User action → Event handler
 - Calculable from props/state → Calculate during render
@@ -34,13 +35,13 @@ Effects are an escape hatch from React for synchronizing with external systems. 
 
 ```jsx
 // ❌ Bad
-const [fullName, setFullName] = useState('');
+const [fullName, setFullName] = useState("");
 useEffect(() => {
-  setFullName(firstName + ' ' + lastName);
+   setFullName(firstName + " " + lastName);
 }, [firstName, lastName]);
 
 // ✅ Good - calculate during render
-const fullName = firstName + ' ' + lastName;
+const fullName = firstName + " " + lastName;
 ```
 
 ### 2. Expensive Calculations
@@ -49,13 +50,13 @@ const fullName = firstName + ' ' + lastName;
 // ❌ Bad
 const [visibleTodos, setVisibleTodos] = useState([]);
 useEffect(() => {
-  setVisibleTodos(getFilteredTodos(todos, filter));
+   setVisibleTodos(getFilteredTodos(todos, filter));
 }, [todos, filter]);
 
 // ✅ Good - useMemo for expensive operations
 const visibleTodos = useMemo(
-  () => getFilteredTodos(todos, filter),
-  [todos, filter]
+   () => getFilteredTodos(todos, filter),
+   [todos, filter],
 );
 ```
 
@@ -66,11 +67,11 @@ Use `console.time()`/`console.timeEnd()` to measure. Memoize if ≥1ms.
 ```jsx
 // ❌ Bad
 useEffect(() => {
-  setComment('');
+   setComment("");
 }, [userId]);
 
 // ✅ Good - use key to reset
-<Profile userId={userId} key={userId} />
+<Profile userId={userId} key={userId} />;
 ```
 
 ### 4. Adjust Part of State on Prop Change
@@ -78,11 +79,11 @@ useEffect(() => {
 ```jsx
 // ❌ Bad
 useEffect(() => {
-  setSelection(null);
+   setSelection(null);
 }, [items]);
 
 // ✅ Good - derive from state
-const selection = items.find(item => item.id === selectedId) ?? null;
+const selection = items.find((item) => item.id === selectedId) ?? null;
 ```
 
 ### 5. Event-Specific Logic
@@ -90,15 +91,15 @@ const selection = items.find(item => item.id === selectedId) ?? null;
 ```jsx
 // ❌ Bad
 useEffect(() => {
-  if (product.isInCart) {
-    showNotification(`Added ${product.name}!`);
-  }
+   if (product.isInCart) {
+      showNotification(`Added ${product.name}!`);
+   }
 }, [product]);
 
 // ✅ Good - in event handler
 function handleBuyClick() {
-  addToCart(product);
-  showNotification(`Added ${product.name}!`);
+   addToCart(product);
+   showNotification(`Added ${product.name}!`);
 }
 ```
 
@@ -107,15 +108,15 @@ function handleBuyClick() {
 ```jsx
 // ❌ Bad
 useEffect(() => {
-  if (jsonToSubmit !== null) {
-    post('/api/register', jsonToSubmit);
-  }
+   if (jsonToSubmit !== null) {
+      post("/api/register", jsonToSubmit);
+   }
 }, [jsonToSubmit]);
 
 // ✅ Good - in event handler
 function handleSubmit(e) {
-  e.preventDefault();
-  post('/api/register', { firstName, lastName });
+   e.preventDefault();
+   post("/api/register", { firstName, lastName });
 }
 ```
 
@@ -123,23 +124,29 @@ function handleSubmit(e) {
 
 ```jsx
 // ❌ Bad - cascading Effects
-useEffect(() => { setGoldCardCount(c => c + 1); }, [card]);
-useEffect(() => { setRound(r => r + 1); }, [goldCardCount]);
-useEffect(() => { setIsGameOver(true); }, [round]);
+useEffect(() => {
+   setGoldCardCount((c) => c + 1);
+}, [card]);
+useEffect(() => {
+   setRound((r) => r + 1);
+}, [goldCardCount]);
+useEffect(() => {
+   setIsGameOver(true);
+}, [round]);
 
 // ✅ Good - calculate + update in handler
 const isGameOver = round > 5;
 
 function handlePlaceCard(nextCard) {
-  setCard(nextCard);
-  if (nextCard.gold) {
-    if (goldCardCount < 3) {
-      setGoldCardCount(goldCardCount + 1);
-    } else {
-      setGoldCardCount(0);
-      setRound(round + 1);
-    }
-  }
+   setCard(nextCard);
+   if (nextCard.gold) {
+      if (goldCardCount < 3) {
+         setGoldCardCount(goldCardCount + 1);
+      } else {
+         setGoldCardCount(0);
+         setRound(round + 1);
+      }
+   }
 }
 ```
 
@@ -148,20 +155,20 @@ function handlePlaceCard(nextCard) {
 ```jsx
 // ❌ Bad - runs twice in dev
 useEffect(() => {
-  loadDataFromLocalStorage();
-  checkAuthToken();
+   loadDataFromLocalStorage();
+   checkAuthToken();
 }, []);
 
 // ✅ Good - module level or guard
 let didInit = false;
 function App() {
-  useEffect(() => {
-    if (!didInit) {
-      didInit = true;
-      loadDataFromLocalStorage();
-      checkAuthToken();
-    }
-  }, []);
+   useEffect(() => {
+      if (!didInit) {
+         didInit = true;
+         loadDataFromLocalStorage();
+         checkAuthToken();
+      }
+   }, []);
 }
 ```
 
@@ -170,18 +177,20 @@ function App() {
 ```jsx
 // ❌ Bad - extra render pass
 useEffect(() => {
-  onChange(isOn);
+   onChange(isOn);
 }, [isOn, onChange]);
 
 // ✅ Good - update both in handler
 function updateToggle(nextIsOn) {
-  setIsOn(nextIsOn);
-  onChange(nextIsOn);
+   setIsOn(nextIsOn);
+   onChange(nextIsOn);
 }
 
 // ✅ Also good - lift state (controlled component)
 function Toggle({ isOn, onChange }) {
-  function handleClick() { onChange(!isOn); }
+   function handleClick() {
+      onChange(!isOn);
+   }
 }
 ```
 
@@ -190,13 +199,13 @@ function Toggle({ isOn, onChange }) {
 ```jsx
 // ❌ Bad - child fetches, passes up
 useEffect(() => {
-  if (data) onFetched(data);
+   if (data) onFetched(data);
 }, [data]);
 
 // ✅ Good - parent fetches, passes down
 function Parent() {
-  const data = useSomeAPI();
-  return <Child data={data} />;
+   const data = useSomeAPI();
+   return <Child data={data} />;
 }
 ```
 
@@ -205,20 +214,20 @@ function Parent() {
 ```jsx
 // ❌ Bad - manual subscription
 useEffect(() => {
-  const handler = () => setIsOnline(navigator.onLine);
-  window.addEventListener('online', handler);
-  window.addEventListener('offline', handler);
-  return () => {
-    window.removeEventListener('online', handler);
-    window.removeEventListener('offline', handler);
-  };
+   const handler = () => setIsOnline(navigator.onLine);
+   window.addEventListener("online", handler);
+   window.addEventListener("offline", handler);
+   return () => {
+      window.removeEventListener("online", handler);
+      window.removeEventListener("offline", handler);
+   };
 }, []);
 
 // ✅ Good - useSyncExternalStore
 return useSyncExternalStore(
-  subscribe,
-  () => navigator.onLine,
-  () => true
+   subscribe,
+   () => navigator.onLine,
+   () => true,
 );
 ```
 
@@ -227,11 +236,13 @@ return useSyncExternalStore(
 ```jsx
 // ✅ Correct - cleanup ignores stale responses
 useEffect(() => {
-  let ignore = false;
-  fetchResults(query).then(json => {
-    if (!ignore) setResults(json);
-  });
-  return () => { ignore = true; };
+   let ignore = false;
+   fetchResults(query).then((json) => {
+      if (!ignore) setResults(json);
+   });
+   return () => {
+      ignore = true;
+   };
 }, [query]);
 ```
 
@@ -239,16 +250,16 @@ useEffect(() => {
 
 ## Quick Reference
 
-| Scenario | Solution |
-|----------|----------|
-| Transform data | Calculate during render |
-| Expensive calculation | `useMemo` |
-| Reset all state on prop | `key` attribute |
-| Adjust state on prop | Derive during render |
-| Share event logic | Extract function, call from handlers |
-| User events | Event handlers |
-| External system sync | Effect |
-| Notify parent | Update in handler or lift state |
-| Init once | Module-level or guard variable |
-| External store | `useSyncExternalStore` |
-| Fetch data | Effect with cleanup |
+| Scenario                | Solution                             |
+| ----------------------- | ------------------------------------ |
+| Transform data          | Calculate during render              |
+| Expensive calculation   | `useMemo`                            |
+| Reset all state on prop | `key` attribute                      |
+| Adjust state on prop    | Derive during render                 |
+| Share event logic       | Extract function, call from handlers |
+| User events             | Event handlers                       |
+| External system sync    | Effect                               |
+| Notify parent           | Update in handler or lift state      |
+| Init once               | Module-level or guard variable       |
+| External store          | `useSyncExternalStore`               |
+| Fetch data              | Effect with cleanup                  |
