@@ -20,4 +20,3 @@ Copy any skill directory to your agent's skills location or using Vercel's `skil
 ```bash
 npx skills add nbbaier/agent-skills
 ```
-
