@@ -21,14 +21,3 @@ Copy any skill directory to your agent's skills location or using Vercel's `skil
 npx skills add nbbaier/agent-skills
 ```
 
-## Structure
-
-Each skill contains a `SKILL.md` file with:
-
-- YAML frontmatter (`name`, `description`)
-- Detailed instructions and workflows
-- Examples and reference material
-
-```
-
-```
