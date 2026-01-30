@@ -1,5 +1,5 @@
 ---
-name: Logging Best Practices
+name: logging-best-practices
 description: Use before implementing logs in a medium to large scale production system.
 ---
 
