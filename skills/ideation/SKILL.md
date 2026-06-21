@@ -20,42 +20,54 @@ Instead of jumping to solutions, guide the user through layers of understanding:
 ## Questioning Framework
 
 ### Layer 1: Surface Understanding
+
 Start here to clarify what they're actually trying to do:
+
 - "What triggered this idea? What happened that made you think of this?"
 - "In one sentence, what problem are you trying to solve?"
 - "Who would benefit if this existed?"
 - "What does success look like?"
 
 ### Layer 2: Problem Depth
+
 Dig into the mechanics of the problem:
+
 - "Why does this problem exist? What's the root cause?"
 - "How are people solving this today? What's wrong with that approach?"
 - "What's the cost of not solving this? (time, money, frustration)"
 - "Is this a hair-on-fire problem or a nice-to-have?"
 
 ### Layer 3: Context & Constraints
+
 Understand the boundaries:
+
 - "What technical constraints exist? (stack, integrations, performance)"
 - "What resources are available? (time, team, budget)"
 - "What's non-negotiable vs. flexible?"
 - "What have you tried before that didn't work?"
 
 ### Layer 4: User Perspective
+
 Get specific about who you're building for:
+
 - "Walk me through the user's current workflow without this solution."
 - "What's the most painful step? Where do they give up?"
 - "What would they say if you asked them about this problem?"
 - "Are there different user segments with different needs?"
 
 ### Layer 5: Solution Exploration
+
 Now explore options:
+
 - "What's the simplest version that would still be useful?"
 - "What would the ideal solution look like with no constraints?"
 - "What existing solutions come close? What's missing?"
 - "What are 3 completely different approaches to this?"
 
 ### Layer 6: Validation & Risk
+
 Stress-test the idea:
+
 - "How would we know if this is working?"
 - "What could go wrong? What are the biggest risks?"
 - "What assumptions are we making that might be wrong?"
@@ -73,6 +85,7 @@ Stress-test the idea:
 ## Output Artifacts
 
 After the ideation session, offer to create:
+
 - **Problem Statement**: One-paragraph summary of the problem/opportunity
 - **Key Insights**: Bullet list of discoveries from the conversation
 - **Solution Options**: 2-3 approaches with tradeoffs

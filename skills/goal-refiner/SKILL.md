@@ -44,12 +44,12 @@ Poor candidates:
 7. If the user asks to brainstorm first, refine in normal chat or plan mode first; if useful, have Codex create or reference a plan file before drafting the Goal.
 8. If the user asks to be interviewed before the Goal is written, ask the smallest set of high-signal questions needed to define the contract, then wait.
 9. If one missing fact would make the Goal risky or incoherent, ask one concise question. Otherwise make a conservative assumption and label it.
-10. Draft the Goal in the template below. The Goal should act as both the initial task request and the completion audit rubric.
-11. For long-running work, require compact checkpoint updates: current checkpoint, what was verified, what remains, and whether Codex is blocked.
-12. Include final cleanup when the task may involve failed experiments, generated helpers, speculative edits, or optimization attempts.
-13. Keep the final Goal text under 4,000 characters. Prefer concrete nouns, commands, files, metrics, and artifacts over explanation.
-14. Before returning the Goal, verify the total output is less than 4,000 characters, including `/goal`, assumptions, and all surrounding text. If it is 4,000 characters or more, shorten it until it is below the hard cap.
-15. Do not call goal tools or start a Goal unless the user explicitly asks to set/start/create it. Otherwise output a ready-to-use `/goal` draft.
+10.   Draft the Goal in the template below. The Goal should act as both the initial task request and the completion audit rubric.
+11.   For long-running work, require compact checkpoint updates: current checkpoint, what was verified, what remains, and whether Codex is blocked.
+12.   Include final cleanup when the task may involve failed experiments, generated helpers, speculative edits, or optimization attempts.
+13.   Keep the final Goal text under 4,000 characters. Prefer concrete nouns, commands, files, metrics, and artifacts over explanation.
+14.   Before returning the Goal, verify the total output is less than 4,000 characters, including `/goal`, assumptions, and all surrounding text. If it is 4,000 characters or more, shorten it until it is below the hard cap.
+15.   Do not call goal tools or start a Goal unless the user explicitly asks to set/start/create it. Otherwise output a ready-to-use `/goal` draft.
 
 ## Goal Template
 
