@@ -1,0 +1,13 @@
+{
+	"name": "skills",
+	"skills": [
+		"./skills/code-refactor-review",
+		"./skills/goal-refiner",
+		"./skills/html-tools",
+		"./skills/ideation",
+		"./skills/implementation-guide",
+		"./skills/logging-best-practices",
+		"./skills/react-effect-patterns",
+		"./skills/tufte-viz"
+	]
+}
